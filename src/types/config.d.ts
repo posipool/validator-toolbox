@@ -1,15 +1,13 @@
 namespace Validator {
-  interface NodeConfig {
-    binaryDownloadUrl: string
-    binaryName: string
-  }
-
-  interface CliConfig {
+  interface ToolConfig {
+    nodeDownloadUrl: string
+    nodeName: string
     cliDownloadUrl: string
     cliName: string
     rpc: string
     rcloneConfig: string
     rcloneSyncCommand: string
+    setBlockchainEnvironment: (environment: string) => void
   }
 }
 
@@ -22,6 +20,7 @@ type harmonyOneBasedAnswers = {
   passphrase: string
   service: string
   blskey: string
+  blskeyQuantity: number
 }
 
 type BlsKey = {
