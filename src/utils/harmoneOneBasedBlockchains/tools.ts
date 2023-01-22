@@ -1,7 +1,7 @@
 import bash from '../bash'
 import fs from 'fs'
 
-export default class Tool {
+export default class Tools {
   constructor(private config: Validator.ToolConfig) {}
 
   async downloadCli() {
