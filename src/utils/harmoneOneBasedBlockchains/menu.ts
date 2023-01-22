@@ -1,12 +1,13 @@
 import inquirer from 'inquirer'
+import serviceTypeIncluded from './serviceTypeIsIncluded'
 
 export default async function menu() {
   const allServices = [
     'Start new node',
     'create new blskeys',
-    'Check shard from blskey',
     'Update node version',
     'Update cli version',
+    'Check shard from blskey',
     'Check node version',
     'Check cli version',
   ]
@@ -24,13 +25,18 @@ export default async function menu() {
         name: 'environment',
         message: 'Choose the environmnet',
         choices: ['testnet', 'mainnet'],
+        when(answers) {
+          const services = ['Start new node']
+          return serviceTypeIncluded(services, answers.service)
+        },
       },
       {
         type: 'number',
         name: 'blskeyQuantity',
         message: 'Enter the amount of blskey to be created:',
         when(answers) {
-          return answers.service != 'Check shard from blskey'
+          const services = ['Start new node', 'create new blskeys']
+          return serviceTypeIncluded(services, answers.service)
         },
       },
       {
@@ -38,7 +44,8 @@ export default async function menu() {
         name: 'passphrase',
         message: 'Set the blskeys passphrase',
         when(answers) {
-          return answers.service != 'Check shard from blskey' || answers.blskeyQuantity > 0
+          const services = ['Start new node', 'create new blskeys']
+          return serviceTypeIncluded(services, answers.service) && answers.blskeyQuantity > 0
         },
       },
     ])
