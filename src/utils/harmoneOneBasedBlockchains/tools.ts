@@ -13,6 +13,15 @@ export default class Tools {
     console.log('Download CLI tool finished!')
   }
 
+  async configNodeValidator() {
+    const networkEnvironment = process.env.BLOCKCHAIN_ENVIRONMENT
+    await bash(`./${this.config.nodeName} config dump --network ${networkEnvironment} ${this.config.nodeName}.conf`)
+  }
+
+  async startNode() {
+    await bash(`./${this.config.nodeName} -c ${this.config.nodeName}.conf`)
+  }
+
   async downloadNodeBinary() {
     console.log('Start download node bynary')
     const nodeName = this.config.nodeName
