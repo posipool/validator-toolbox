@@ -9,7 +9,7 @@
     "dev": "npm run dev-cmd --inspect=9229 src/app.ts",
     "lint": "eslint .",
     "lint:fix": "npm run lint --fix",
-    "run-build": "node -r source-map-support/register --unhandled-rejections=strict --trace-exit --trace-uncaught --trace-sigint --report-compact src/app.js",
+    "run-build": "node -r source-map-support/register --unhandled-rejections=strict --trace-exit --trace-uncaught --trace-sigint --report-compact dist/app.js",
     "start-cmd": "node -r ts-node/register -r tsconfig-paths/register --unhandled-rejections=strict --trace-exit --trace-uncaught --trace-sigint --report-compact ",
     "dev-cmd": "ts-node-dev -r dotenv/config -r tsconfig-paths/register --trace-exit --trace-uncaught --trace-sigint --transpile-only --debug ",
     "test": "jest"
@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/posipool/validator-toolbox#readme",
   "devDependencies": {
+    "@types/inquirer": "^9.0.3",
     "@types/jest": "^29.2.4",
     "@typescript-eslint/eslint-plugin": "^5.45.1",
     "@typescript-eslint/parser": "^5.45.1",
@@ -43,5 +44,8 @@
     "ts-node-dev": "^2.0.0",
     "ttypescript": "^1.5.13",
     "typescript": "^4.9.3"
+  },
+  "dependencies": {
+    "inquirer": "^8.2.5"
   }
 }
