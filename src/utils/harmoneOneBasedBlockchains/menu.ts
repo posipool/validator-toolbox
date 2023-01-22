@@ -48,6 +48,15 @@ export default async function menu() {
           return serviceTypeIncluded(services, answers.service) && answers.blskeyQuantity > 0
         },
       },
+      {
+        type: 'input',
+        name: 'blskey',
+        message: 'Enter the bls key:',
+        when(answers) {
+          const services = ['Check shard from blskey']
+          return serviceTypeIncluded(services, answers.service)
+        },
+      },
     ])
     .then((answers) => {
       process.env.BLS_KEY_PASSPHRASE = answers.passphrase
