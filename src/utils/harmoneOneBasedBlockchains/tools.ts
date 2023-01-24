@@ -7,8 +7,7 @@ export default class Tools {
   async downloadCli() {
     console.log('Start download CLI tool')
     const cliname = this.config.cliName
-    await bash(`curl -LO ${this.config.cliDownloadUrl}`)
-    await bash(`mv ${this.config.cliDownloadUrl.split('/').pop()} ${cliname}`)
+    await bash(`curl ${this.config.cliDownloadUrl} -o ${cliname}`)
     await bash(`chmod +x ${cliname}`)
     console.log('Download CLI tool finished!')
   }
