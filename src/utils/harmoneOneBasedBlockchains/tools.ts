@@ -10,6 +10,10 @@ export default class Tools {
     await bash(`curl ${this.config.cliDownloadUrl} -o ${cliname}`)
     await bash(`chmod +x ${cliname}`)
     console.log('Download CLI tool finished!')
+  }  
+
+  async checkCliversion() {
+    await bash(`./${this.config.cliName} version`)
   }
 
   async configNodeValidator() {

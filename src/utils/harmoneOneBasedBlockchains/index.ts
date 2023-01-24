@@ -31,7 +31,7 @@ export default async function validatorTools(config: Validator.ToolConfig) {
           tools.checkNodeVersion()
           break
         case 'Check cli version':
-          console.log('Will be developed soon')
+          await tools.checkCliversion()
           break
         default:
           break
