@@ -16,6 +16,16 @@ export default class Tools {
     await bash(`./${this.config.cliName} version`)
   }
 
+  async updateCli(){
+    console.log('Current version:')
+    await this.checkCliversion()
+    await bash('mkdir -p backup')
+    await bash(`mv ${this.config.cliName} backup`)
+    await this.downloadCli()
+    console.log('Updated version:')
+    await this.checkCliversion()
+  }
+
   async configNodeValidator() {
     const networkEnvironment = process.env.BLOCKCHAIN_ENVIRONMENT
     await bash(`./${this.config.nodeName} config dump --network ${networkEnvironment} ${this.config.nodeName}.conf`)

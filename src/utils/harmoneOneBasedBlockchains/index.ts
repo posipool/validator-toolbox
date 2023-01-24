@@ -25,7 +25,7 @@ export default async function validatorTools(config: Validator.ToolConfig) {
           console.log('Will be developed soon')
           break
         case 'Update cli version':
-          console.log('Will be developed soon')
+          tools.updateCli()
           break
         case 'Check node version':
           tools.checkNodeVersion()
