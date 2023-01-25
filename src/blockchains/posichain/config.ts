@@ -1,3 +1,5 @@
+import os from 'os'
+
 export const config: Validator.ToolConfig = {
   nodeDownloadUrl: 'curl -LO https://download.posichain.org/latest/posichain && chmod +x posichain',
   nodeName: 'posichain',
@@ -6,7 +8,7 @@ export const config: Validator.ToolConfig = {
   rpc: '',
   rcloneSyncCommand: '',
   rcloneConfig: `
-  cat<<-EOF > /home/psc/.config/rclone/rclone.conf
+  cat<<-EOF > ${os.homedir()}/.config/rclone/rclone.conf
   [mainnet]
   type = google cloud storage
   object_acl = publicRead
