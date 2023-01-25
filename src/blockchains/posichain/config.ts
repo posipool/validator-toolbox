@@ -1,7 +1,7 @@
 import os from 'os'
 
 export const config: Validator.ToolConfig = {
-  nodeDownloadUrl: 'curl -LO https://download.posichain.org/latest/posichain && chmod +x posichain',
+  nodeDownloadUrl: 'https://download.posichain.org/latest/posichain',
   nodeName: 'posichain',
   cliDownloadUrl: `https://download.posichain.org/latest/psc`,
   cliName: 'psc',
