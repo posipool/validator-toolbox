@@ -1,3 +1,5 @@
+import os from 'os'
+
 export const config: Validator.ToolConfig = {
   nodeDownloadUrl: 'curl -LO https://download.posichain.org/latest/posichain && chmod +x posichain',
   nodeName: 'posichain',
@@ -5,8 +7,7 @@ export const config: Validator.ToolConfig = {
   cliName: 'psc',
   rpc: '',
   rcloneSyncCommand: '',
-  rcloneConfig: `
-  cat<<-EOF > /home/psc/.config/rclone/rclone.conf
+  rcloneConfig: `cat<<-EOF > ${os.homedir()}/.config/rclone/rclone.conf
   [mainnet]
   type = google cloud storage
   object_acl = publicRead
@@ -22,10 +23,9 @@ export const config: Validator.ToolConfig = {
   location = asia
   storage_class = MULTI_REGIONAL
   anonymous = true
-  EOF
-`,
-  setBlockchainEnvironment(environment) {
-    if (environment) {
+EOF`,
+  setBlockchainEnvironment(environment: typeof process.env.BLOCKCHAIN_ENVIRONMENT) {
+    if (environment === 'mainnet') {
       this.rpc = 'https://api.posichain.org'
       this.rcloneSyncCommand =
         'rclone -P -L --checksum sync mainnet:posichain-mainnet-data/posichain-node-vo001/posichain_db_0 posichain_db_0 --multi-thread-streams 4 --transfers=32'

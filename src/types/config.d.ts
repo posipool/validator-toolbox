@@ -7,7 +7,7 @@ namespace Validator {
     rpc: string
     rcloneConfig: string
     rcloneSyncCommand: string
-    setBlockchainEnvironment: (environment: string) => void
+    setBlockchainEnvironment: (environment: typeof process.env.BLOCKCHAIN_ENVIRONMENT) => void
   }
 }
 
