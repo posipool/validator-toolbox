@@ -1,6 +1,7 @@
 import bash from '../bash'
 import fs from 'fs'
 import path from 'path'
+import os from 'os'
 
 export default class Tools {
   constructor(private config: Validator.ToolConfig) {}
@@ -74,6 +75,7 @@ export default class Tools {
 
   async syncBlockchain() {
     await bash(`curl https://rclone.org/install.sh | sudo bash`)
+    await bash(`mkdir -p ${os.homedir()}/.config/rclone`)
     await bash(this.config.rcloneConfig)
     await bash(this.config.rcloneSyncCommand)
   }
