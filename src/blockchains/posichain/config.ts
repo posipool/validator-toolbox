@@ -7,8 +7,7 @@ export const config: Validator.ToolConfig = {
   cliName: 'psc',
   rpc: '',
   rcloneSyncCommand: '',
-  rcloneConfig: `
-  cat<<-EOF > ${os.homedir()}/.config/rclone/rclone.conf
+  rcloneConfig: `cat<<-EOF > ${os.homedir()}/.config/rclone/rclone.conf
   [mainnet]
   type = google cloud storage
   object_acl = publicRead
@@ -24,8 +23,7 @@ export const config: Validator.ToolConfig = {
   location = asia
   storage_class = MULTI_REGIONAL
   anonymous = true
-  EOF
-`,
+EOF`,
   setBlockchainEnvironment(environment: typeof process.env.BLOCKCHAIN_ENVIRONMENT) {
     if (environment === 'mainnet') {
       this.rpc = 'https://api.posichain.org'
