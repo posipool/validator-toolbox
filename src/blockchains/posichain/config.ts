@@ -26,8 +26,8 @@ export const config: Validator.ToolConfig = {
   anonymous = true
   EOF
 `,
-  setBlockchainEnvironment(environment) {
-    if (environment) {
+  setBlockchainEnvironment(environment: typeof process.env.BLOCKCHAIN_ENVIRONMENT) {
+    if (environment === 'mainnet') {
       this.rpc = 'https://api.posichain.org'
       this.rcloneSyncCommand =
         'rclone -P -L --checksum sync mainnet:posichain-mainnet-data/posichain-node-vo001/posichain_db_0 posichain_db_0 --multi-thread-streams 4 --transfers=32'
