@@ -31,6 +31,7 @@ export default class Tools {
   async configNodeValidator() {
     const networkEnvironment = process.env.BLOCKCHAIN_ENVIRONMENT
     await bash(`./${this.config.nodeName} config dump --network ${networkEnvironment} ${this.config.nodeName}.conf`)
+    console.log('Node config file generated!')
   }
 
   async startNode() {
