@@ -1,5 +1,6 @@
 import bash from '../bash'
 import fs from 'fs'
+import path from 'path'
 
 export default class Tools {
   constructor(private config: Validator.ToolConfig) {}
@@ -49,18 +50,20 @@ export default class Tools {
   }
 
   async createBlsKeys(quantity: number, shard: number) {
+    const passphrase = process.env.BLS_KEY_PASSPHRASE
     const cliname = this.config.cliName
-    for (let _ of Array(quantity)) {
-      await bash(`./${cliname} keys generate-bls-key --shard ${shard} --passphrase-file ./blskeysPassphrase.txt`)
-    }
+    await bash(`echo -n '${passphrase}' > blskeysPassphrase.txt`)
+    await bash(`./${cliname} keys generate-bls-keys --count ${quantity} --shard ${shard} --passphrase-file ./blskeysPassphrase.txt`)
     await bash(`mkdir -p .${cliname}/blskeys`)
     await bash(`mv *.key .${cliname}/blskeys`)
-    const blskeys = fs
-      .readdirSync(`.${cliname}/blskeys`, { encoding: 'utf8' })
-      .filter((blskey) => blskey.includes('.key'))
-
-    for (let blskey of blskeys) {
-      await bash(`echo -n ${process.env.BLS_KEY_PASSPHRASE} > .${cliname}/blskeys/${blskey.replace('.key', '.pass')}`)
+    const blsFiles = fs.readdirSync(`${path.dirname(process.cwd())}/.${cliname}/blskeys`, { encoding: 'utf8' })
+    const blskeyFiles = blsFiles.filter((blskeyFile) => blskeyFile.includes('.key'))
+    const blsFilePasswords = blsFiles.filter((blspassFile) => blspassFile.includes('.pass'))
+    for (const blskeyFile of blskeyFiles){
+        const blskey = blskeyFile.replace('.key', '')
+        if(blskeyFile.includes('.key') && !blsFilePasswords.includes(`${blskey}.pass`)){
+          bash(`echo -n ${passphrase} > .${cliname}/blskeys/${blskey}.pass`)
+        }
     }
   }
 
