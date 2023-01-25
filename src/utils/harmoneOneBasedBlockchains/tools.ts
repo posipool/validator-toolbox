@@ -7,10 +7,23 @@ export default class Tools {
   async downloadCli() {
     console.log('Start download CLI tool')
     const cliname = this.config.cliName
-    await bash(`curl -LO ${this.config.cliDownloadUrl}`)
-    await bash(`mv ${this.config.cliDownloadUrl.split('/').pop()} ${cliname}`)
+    await bash(`curl ${this.config.cliDownloadUrl} -o ${cliname}`)
     await bash(`chmod +x ${cliname}`)
     console.log('Download CLI tool finished!')
+  }  
+
+  async checkCliversion() {
+    await bash(`./${this.config.cliName} version`)
+  }
+
+  async updateCli(){
+    console.log('Current version:')
+    await this.checkCliversion()
+    await bash('mkdir -p backup')
+    await bash(`mv ${this.config.cliName} backup`)
+    await this.downloadCli()
+    console.log('Updated version:')
+    await this.checkCliversion()
   }
 
   async configNodeValidator() {
