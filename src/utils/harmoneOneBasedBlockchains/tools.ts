@@ -40,8 +40,7 @@ export default class Tools {
   async downloadNodeBinary() {
     console.log('Start download node binary')
     const nodeName = this.config.nodeName
-    await bash(`curl -LO ${this.config.nodeDownloadUrl}`)
-    await bash(`mv ${this.config.cliDownloadUrl.split('/').pop()} ${nodeName}`)
+    await bash(`curl ${this.config.nodeDownloadUrl} -o ${nodeName}`)
     await bash(`chmod +x ${nodeName}`)
     console.log('Download node binary finished!')
   }
