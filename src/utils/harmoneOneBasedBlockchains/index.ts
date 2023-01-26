@@ -16,7 +16,7 @@ export default async function validatorTools(config: Validator.ToolConfig) {
           await tools.syncBlockchain()
           await tools.downloadNodeBinary()
           await tools.configNodeValidator()
-          
+          await tools.systemSetup()
           break
         case 'create new blskeys':
           await tools.createBlsKeys(answers.blskeyQuantity, 0)
