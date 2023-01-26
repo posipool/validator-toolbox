@@ -52,7 +52,7 @@ export default class Tools {
 EOF`)
     await bash(`sudo mv ${os.homedir()}/${this.config.nodeName}.service /etc/systemd/system`)
     await bash(`sudo chmod 755 /etc/systemd/system/${this.config.nodeName}.service`)
-    await bash(`sudo systemctl enable posichain.service`)
+    await bash(`sudo systemctl enable ${this.config.nodeName}.service`)
   }
 
   async configNodeValidator() {
