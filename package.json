@@ -5,12 +5,10 @@
   "main": "index.js",
   "scripts": {
     "build": "ttsc -p ./",
-    "start": "npm run run-build",
+    "start": "node dist/app.js",
     "dev": "npm run dev-cmd --inspect=9229 src/app.ts",
     "lint": "eslint .",
     "lint:fix": "npm run lint --fix",
-    "run-build": "node -r source-map-support/register --unhandled-rejections=strict --trace-exit --trace-uncaught --trace-sigint --report-compact dist/app.js",
-    "start-cmd": "node -r ts-node/register -r tsconfig-paths/register --unhandled-rejections=strict --trace-exit --trace-uncaught --trace-sigint --report-compact ",
     "dev-cmd": "ts-node-dev -r dotenv/config -r tsconfig-paths/register --trace-exit --trace-uncaught --trace-sigint --transpile-only --debug ",
     "test": "jest"
   },
