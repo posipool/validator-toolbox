@@ -28,6 +28,33 @@ export default class Tools {
     await this.checkCliversion()
   }
 
+  async systemSetup() {
+  await bash(`sudo mkdir -p /etc/systemd/system`)
+  await bash(`cat<<-EOF > ${os.homedir()}/${this.config.nodeName}.service
+  [Unit]
+  Description=${this.config.nodeName} daemon
+  After=network-online.target
+
+  [Service]
+  Type=simple
+  Restart=always
+  RestartSec=1
+  User=${os.userInfo().username}
+  WorkingDirectory=${os.homedir()}
+  ExecStart=${os.homedir()}/${this.config.nodeName} -c ${this.config.nodeName}.conf
+  SyslogIdentifier=${this.config.nodeName}
+  StartLimitInterval=0
+  LimitNOFILE=65536
+  LimitNPROC=65536
+
+  [Install]
+  WantedBy=multi-user.target
+EOF`)
+    await bash(`sudo mv ${os.homedir()}/${this.config.nodeName}.service /etc/systemd/system`)
+    await bash(`sudo chmod 755 /etc/systemd/system/${this.config.nodeName}.service`)
+    await bash(`sudo systemctl enable ${this.config.nodeName}.service`)
+  }
+
   async configNodeValidator() {
     const networkEnvironment = process.env.BLOCKCHAIN_ENVIRONMENT
     await bash(`./${this.config.nodeName} config dump --network ${networkEnvironment} ${this.config.nodeName}.conf`)
@@ -35,7 +62,7 @@ export default class Tools {
   }
 
   async startNode() {
-    await bash(`./${this.config.nodeName} -c ${this.config.nodeName}.conf`)
+    await bash(`sudo systemctl start ${this.config.nodeName}`)
   }
 
   async downloadNodeBinary() {

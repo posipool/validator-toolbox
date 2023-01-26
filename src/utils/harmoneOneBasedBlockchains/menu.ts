@@ -3,7 +3,8 @@ import serviceTypeIncluded from './serviceTypeIsIncluded'
 
 export default async function menu() {
   const allServices = [
-    'Start new node',
+    'Setup new node',
+    'Start node',
     'create new blskeys',
     'Update node version',
     'Update cli version',
@@ -26,7 +27,7 @@ export default async function menu() {
         message: 'Choose the environmnet',
         choices: ['testnet', 'mainnet'],
         when(answers) {
-          const services = ['Start new node']
+          const services = ['Setup new node']
           return serviceTypeIncluded(services, answers.service)
         },
       },
@@ -35,7 +36,7 @@ export default async function menu() {
         name: 'blskeyQuantity',
         message: 'Enter the amount of blskey to be created:',
         when(answers) {
-          const services = ['Start new node', 'create new blskeys']
+          const services = ['Setup new node', 'create new blskeys']
           return serviceTypeIncluded(services, answers.service)
         },
       },
@@ -44,7 +45,7 @@ export default async function menu() {
         name: 'passphrase',
         message: 'Set the blskeys passphrase',
         when(answers) {
-          const services = ['Start new node', 'create new blskeys']
+          const services = ['Setup new node', 'create new blskeys']
           return serviceTypeIncluded(services, answers.service) && answers.blskeyQuantity > 0
         },
       },
