@@ -10,13 +10,16 @@ export default async function validatorTools(config: Validator.ToolConfig) {
       const tools = new Tools(config)
 
       switch (answers.service) {
-        case 'Start new node':
+        case 'Setup new node':
           await tools.downloadCli()
           await tools.createBlsKeys(answers.blskeyQuantity, 0)
           await tools.syncBlockchain()
           await tools.downloadNodeBinary()
           await tools.configNodeValidator()
           await tools.systemSetup()
+          break
+        case 'Start node':
+          await tools.startNode()
           break
         case 'create new blskeys':
           await tools.createBlsKeys(answers.blskeyQuantity, 0)

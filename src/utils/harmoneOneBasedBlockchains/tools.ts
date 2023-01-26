@@ -62,7 +62,7 @@ EOF`)
   }
 
   async startNode() {
-    await bash(`./${this.config.nodeName} -c ${this.config.nodeName}.conf`)
+    await bash(`sudo systemctl start ${this.config.nodeName}`)
   }
 
   async downloadNodeBinary() {

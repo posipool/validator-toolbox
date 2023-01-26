@@ -3,7 +3,8 @@ import serviceTypeIncluded from './serviceTypeIsIncluded'
 
 export default async function menu() {
   const allServices = [
-    'Start new node',
+    'Setup new node',
+    'Start node',
     'create new blskeys',
     'Update node version',
     'Update cli version',
