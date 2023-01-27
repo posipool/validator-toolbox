@@ -1,19 +1,13 @@
 # validator-toolbox
 The toolbox for creating validators on multiple blockchains
 
-Commands for use:
+To install the validator toolbox run the command below:
+
 ```
-sudo apt-get update
-sudo apt-get upgrade
+curl https://raw.githubusercontent.com/posipool/validator-toolbox/main/install.sh | sh
+```
+After installation run the validator toolbox by running the command below:
 
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
-source ~/.nvm/nvm.sh
-nvm install --lts
-nvm use --lts
-
-git clone https://github.com/posipool/validator-toolbox.git
-cd validator-toolbox
-npm i
-npm run build
-npm start
+```
+sudo echo && npm start --prefix validator-toolbox
 ```
