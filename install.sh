@@ -19,4 +19,4 @@ npm i --production --prefix validator-toolbox
 echo successfully installed
 echo
 echo To start run the command:
-echo sudo && npm start --prefix validator-toolbox
+echo 'sudo echo && npm start --prefix validator-toolbox'
