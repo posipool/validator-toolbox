@@ -5,7 +5,7 @@ sudo apt-get update -y
 sudo apt-get upgrade -y
 
 # Install nvm, npm and nodejs latest version
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 source ~/.nvm/nvm.sh
 nvm install --lts
 nvm use --lts
