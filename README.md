@@ -24,7 +24,7 @@ The toolbox for creating validators on multiple blockchains
 To install the validator toolbox run the command below:
 
 ```
-curl https://raw.githubusercontent.com/posipool/validator-toolbox/main/install.sh | sh
+curl https://raw.githubusercontent.com/posipool/validator-toolbox/main/install.sh | bash
 ```
 After installation run the validator toolbox by running the command below:
 
